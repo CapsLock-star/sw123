@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>성우에 대한 모든 것</title>
+    <link rel="stylesheet" href="style.css">
+    
+</head>
+<body>
+    <header class="topbar">
+        <a class="logo" href="index.html">MY SITE</a>
+        <nav class="menu">
+            <a href="index.html">홈</a>
+            <a href="information.html">소개</a>
+            <a href="game.html">게임 모음</a>
+            <a href="timeline.html">타임라인</a>
+        </nav>
+    </header>
+    <button class="theme-btn" id="themeBtn" onclick="toggleTheme()">모드 변경</button>
+    <script>
+        // 페이지가 로드될 때 차단 시간이 남아있는지 확인
+        window.onload = function() {
+            var blockUntil = localStorage.getItem('loginBlockUntil');
+            if (blockUntil && Date.now() < parseInt(blockUntil)) {
+                // 1분 차단 시간이 아직 안 지났다면 로그인 창을 숨김
+                document.getElementById('loginModal').style.display = 'none';
+            }
+        }
+
+        function toggleTheme() {
+            if (document.body.className === "light") {
+                document.body.className = "";
+            } else {
+                document.body.className = "light";
+            }
+        }
+
+        function handleLogin(event) {
+            event.preventDefault();
+            var usernameInput = document.getElementById('username').value;
+            var passwordInput = document.getElementById('password').value;
+            var correctId = "1+1";
+            var correctPw = "cutie";
+
+            if (usernameInput.trim() === "" || passwordInput.trim() === "") {
+                alert("아이디와 비밀번호를 입력해주세요.");
+                return;
+            }
+
+            // 아이디와 비밀번호가 모두 turnoff 인 경우 (1분간 차단)
+            if (usernameInput === "turnoff" && passwordInput === "turnoff") {
+                alert("관리자 기능으로 인해 1분 동안 로그인 창이 차단됩니다.");
+                
+                // 현재 시간 + 1분(1 * 60 * 1000 밀리초)을 저장
+                var expireTime = Date.now() + (1 * 60 * 1000);
+                localStorage.setItem('loginBlockUntil', expireTime);
+                
+                document.getElementById('loginModal').style.display = 'none';
+                return;
+            }
+
+            // 기존 로그인 로직
+            if (usernameInput === correctId && passwordInput === correctPw) {
+                alert("로그인에 성공했습니다!");
+                document.getElementById('loginModal').style.display = 'none';
+            } else {
+                alert("아이디 또는 비밀번호가 틀렸습니다.");
+            }
+        }
+    </script>
+
+
+    <section class="hero">
+        <h1>안녕하세요, 성우입니다</h1>
+        <p>성우에 대해 알고 싶으신가요?</p>
+        <a class="btn" href="information.html">성우에 대해 알아보기</a>
+        <a class="btn" href="game.html">성우가 만든 게임 보기</a>
+        <a class="btn" href="timeline.html">타임라인 보기 →</a>
+    </section>
+
+    <footer class="foot">
+        <p>2026 성우의 사이트</p>
+        <p>HTML · CSS · JavaScript로 만들었습니다</p>
+    </footer>
+
+    <!-- 로그인 모달창 -->
+    <div id="loginModal" class="login-overlay">
+        <div class="login-box">
+            <h2>로그인</h2>
+            <form onsubmit="handleLogin(event)">
+                <div class="input-group">
+                    <label for="username">아이디</label>
+                    <input type="text" id="username" placeholder="아이디 입력">
+                </div>
+                <div class="input-group">
+                    <label for="password">비밀번호</label>
+                    <input type="password" id="password" placeholder="비밀번호 입력">
+                </div>
+                <button type="submit" class="login-btn">로그인</button>
+            </form>
+        </div>
+    </div>
+    <script src="theme.js"></script>
+</body>
+</html>
