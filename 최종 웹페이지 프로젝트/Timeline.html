@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>성우에 대한 모든 것</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="logo" href="index.html">MY SITE</a>
+    <nav class="menu">
+      <a href="index.html">홈</a>
+      <a href="information.html">소개</a>
+      <a href="game.html">게임 모음</a>
+      <a href="timeline.html">타임라인</a>
+    </nav>
+  </header>
+<button class="theme-btn" id="themeBtn" onclick="toggleTheme()">모드 변경</button>
+  <main class="wrap">
+    <h2>나의 발자취</h2>
+
+    <div class="controls-container-custom">
+      <div class="left-controls-custom">
+        <div class="help-wrapper-custom">
+          <button class="help-btn-custom">?</button>
+          <span class="tooltip-text-custom">타임라인 제목에 포함된 단어를 입력하면 즉시 검색됩니다.</span>
+        </div>
+        <div class="search-area-custom">
+          <input type="text" id="searchBox" placeholder="검색어를 입력하세요" oninput="doSearch()">
+        </div>
+      </div>
+
+      <div class="right-controls-custom">
+        <div class="help-wrapper-custom">
+          <button class="help-btn-custom">?</button>
+          <span class="tooltip-text-custom">원하는 년도의 버튼을 누르면 해당 발자취만 모아볼 수 있습니다.</span>
+        </div>
+        <div class="filters">
+          <button class="filter-btn" onclick="showYear('all')">전체</button>
+          <button class="filter-btn" onclick="showYear('2026')">2026</button>
+          <button class="filter-btn" onclick="showYear('2025')">2025</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="timeline" id="timeline"></div>
+
+    <script>
+        
+      var timelineData = [
+        { date: "2026. 09", title: "웹사이트 제작", desc: "Html, CSS, 자바 등을 활용해 웹사이트 제작 중. . .", year: "2026", img: "" },
+        { date: "2026. 05", title: "컴퓨팅 사고력 대회 우수상(2위)", desc: "평소에 사고력 문제집 많이 푼 것이 도움됨", year: "2026", img: "computer_think_prize.jpg" },
+        { date: "2026. 04", title: "과학 글쓰기 부문 우수상(2위)", desc: "과학 책을 많이 읽은 것이 도움됨", year: "2026", img: "sciencs_day_prize.jpg" },
+        { date: "2025. 06", title: "코딩 시작", desc: "파이썬으로 처음 프로그래밍을 배웠습니다.", year: "2025", img: "" }
+      ];
+
+      function makeTimeline(list) {
+        var html = "";
+        for (var i = 0; i < list.length; i++) {
+          var item = list[i];
+          html = html + '<article class="tl-item">';
+          html = html + '<time class="tl-date">' + item.date + '</time>';
+          html = html + '<h3>' + item.title + '</h3>';
+          html = html + '<p>' + item.desc + '</p>';
+          if (item.img !== "") {
+            html = html + '<img class="award" src="' + item.img + '" alt="' + item.title + '" onclick="openImage(\''+item.img+'\', \''+item.title+'\')" style="cursor:pointer;">';
+          }
+          html = html + '</article>';
+        }
+        document.getElementById('timeline').innerHTML = html;
+      }
+
+      function showYear(year) {
+        var filtered = [];
+        for (var i = 0; i < timelineData.length; i++) {
+          if (year === "all" || timelineData[i].year === year) {
+            filtered.push(timelineData[i]);
+          }
+        }
+        makeTimeline(filtered);
+      }
+
+      function doSearch() {
+        var word = document.getElementById('searchBox').value;
+        var found = [];
+        for (var i = 0; i < timelineData.length; i++) {
+          if (timelineData[i].title.indexOf(word) !== -1) {
+            found.push(timelineData[i]);
+          }
+        }
+        makeTimeline(found);
+      }
+
+      showYear('all');
+    </script>
+  </main>
+
+  <footer class="foot">
+    <p>2026 성우의 사이트</p>
+    <p>HTML · CSS · JavaScript로 만들었습니다</p>
+  </footer>
+
+  <div id="viewer" class="viewer" onclick="closeImage()">
+    <img id="viewerImg" src="" alt="">
+  </div>
+
+  <script>
+    function openImage(src, alt) {
+      document.getElementById('viewerImg').src = src;
+      document.getElementById('viewerImg').alt = alt;
+      document.getElementById('viewer').className = 'viewer open';
+    }
+
+    function closeImage() {
+      document.getElementById('viewer').className = 'viewer';
+    }
+
+    document.onkeydown = function(e) {
+      if (e.key === "Escape") {
+        closeImage();
+      }
+    };
+  </script>
+  <script src="theme.js"></script>
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>성우에 대한 모든 것</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="topbar">
+    <a class="logo" href="index.html">MY SITE</a>
+    <nav class="menu">
+        <a href="index.html">홈</a>
+        <a href="information.html">소개</a>
+        <a href="game.html">게임 모음</a>
+        <a href="timeline.html">타임라인</a>
+    </nav>
+</header>
+<button class="theme-btn" id="themeBtn" onclick="toggleTheme()">모드 변경</button>
+<script>
+function toggleTheme() {
+    if (document.body.className === "light") {
+        document.body.className = "";
+    } else {
+        document.body.className = "light";
+    }
+}
+</script>
+
+
+<div class="grid-container">
+    <div class="grid-item school-box">
+        <details>
+            <summary>
+                <div class="icon">🏫</div>
+                <h3>다니고 있는 학교</h3>
+                <p class="click-notice">클릭해 보세요!</p>
+            </summary>
+            <div class="details-content">
+                <h4>청옥중학교</h4>
+                <img class="school-img" src="school.jpg" alt="청옥중학교 전경">
+            </div>
+        </details>
+    </div>
+
+    <div class="grid-item">
+        <details>
+            <summary>
+                <div class="icon">📚</div>
+                <h3>취미</h3>
+                <p class="click-notice">클릭해 보세요!</p>
+            </summary>
+            <div class="details-content">
+                <p>책 읽기</p>
+            </div>
+        </details>
+    </div>
+
+    <div class="grid-item">
+        <details>
+            <summary>
+                <div class="icon">🧪</div>
+                <h3>좋아하는 과목</h3>
+                <p class="click-notice">클릭해 보세요!</p>
+            </summary>
+            <div class="details-content">
+                <p>과학, 수학</p>
+            </div>
+        </details>
+    </div>
+
+    <div class="grid-item">
+        <details>
+            <summary>
+                <div class="icon">✨</div>
+                <h3>좌우명</h3>
+                <p class="click-notice">클릭해 보세요!</p>
+            </summary>
+            <div class="details-content">
+                <p>기회가 오면 잡자</p>
+            </div>
+        </details>
+    </div>
+
+    <div class="grid-item">
+        <details>
+            <summary>
+                <div class="icon">🚀</div>
+                <h3>장래희망</h3>
+                <p class="click-notice">클릭해 보세요!</p>
+            </summary>
+            <div class="details-content">
+                <p>신소재 연구원</p>
+            </div>
+        </details>
+    </div>
+</div>
+
+<footer class="foot">
+    <p>2026 성우의 사이트</p>
+    <p>HTML · CSS · JavaScript로 만들었습니다</p>
+</footer>
+<script src="theme.js"></script>
+</body>
+</html>
